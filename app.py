@@ -1,15 +1,20 @@
-from flask import Flask, jsonify
-from .data.database import init_db, db_session
-from .data.models import User
+from flask import Flask, jsonify, session
+#  from flask.ext.session import Session
+from flask_session import Session
+
+from data.database import init_db, db_session
+from data.models import User
 
 app = Flask(__name__)
 init_db()
+
+#  session config
+Session(app)
 
 #  seed user
 u = User('admin', 'password')
 db_session.add(u)
 db_session.commit()
-
 
 
 @app.route('/signup')
