@@ -1,3 +1,4 @@
+import flask
 import os
 import app
 import unittest
@@ -18,16 +19,35 @@ class appTestCase(unittest.TestCase):
     def logout(self):
         return self.app.get('/logout', follow_redirects=True)
 
-    def test_login_logout(self):
-        rv = self.login('admin', 'password')
-        print(rv.data)
-        assert b'status' in rv.data
-        rv = self.logout()
-        assert b'You were logged out' in rv.data
-        rv = self.login('adminx', 'default')
-        assert b'Invalid username' in rv.data
-        rv = self.login('admin', 'defaultx')
-        assert b'Invalid password' in rv.data
+
+    def test_can_login(self):
+        with self.app:
+            response = self.login('admin', 'password')
+            assert response.status_code == 200
+            assert response.get_json()['status'] == 'success'
+            assert flask.session['logged_in'] == True 
+
+    def test_invalid_username(self):
+        with self.app:
+            response = self.login('wrongusername', 'password')
+            assert response.status_code == 403
+            assert response.get_json()['status'] == 'failed'
+            assert flask.session['logged_in'] == False
+
+    def test_invalid_password(self):
+        with self.app:
+            response = self.login('admin', 'wrongpassword')
+            assert response.status_code == 403
+            assert response.get_json()['status'] == 'failed'
+            assert flask.session['logged_in'] == False
+
+    def test_logout(self):
+        with self.app:
+            self.login('admin', 'password')
+
+            response = self.logout()
+            assert response.status_code == 200 
+            assert flask.session['logged_in'] == False
 
 
 if __name__ == '__main__':

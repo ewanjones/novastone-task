@@ -1,8 +1,12 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
+import os
 
-engine = create_engine('sqlite:////tmp/test.db', convert_unicode=True)
+DB_NAME = 'novastone.db'
+DB_PATH = 'sqlite:////{}/{}'.format(os.path.dirname(os.path.realpath(__file__)), DB_NAME)
+
+engine = create_engine(DB_PATH, convert_unicode=True)
 db_session = scoped_session(sessionmaker(autocommit=False,
                                          autoflush=False,
                                          bind=engine))
