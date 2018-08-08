@@ -18,7 +18,7 @@ class AuthTestCase(BaseTestCase):
     def test_can_login(self):
         with app.app_context():
             with self.app:
-                response = self.login('admin', 'password')
+                response = self.login('test', 'password')
                 assert response.status_code == 200
                 assert response.get_json()['status'] == 'success'
                 assert flask.session['logged_in'] == True 
@@ -34,7 +34,7 @@ class AuthTestCase(BaseTestCase):
     def test_invalid_password(self):
         with app.app_context():
             with self.app:
-                response = self.login('admin', 'wrongpassword')
+                response = self.login('test', 'wrongpassword')
                 assert response.status_code == 403
                 assert response.get_json()['status'] == 'failed'
                 assert flask.session['logged_in'] == False
@@ -42,7 +42,7 @@ class AuthTestCase(BaseTestCase):
     def test_logout(self):
         with app.app_context():
             with self.app:
-                self.login('admin', 'password')
+                self.login('test', 'password')
 
                 response = self.logout()
                 assert response.status_code == 200 

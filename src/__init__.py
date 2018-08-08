@@ -28,12 +28,6 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 from .auth import load_user
 
-#  seed user
-#  u = User('admin', 'password')
-#  db_session.add(u)
-#  db_session.commit()
-
-
 
 
 

@@ -4,4 +4,5 @@
 
 ### Run tests
 
-`python flaskr_tests.py`
+`python -m unittest discover`
+

@@ -1,0 +1,10 @@
+{
+  "src/test/test_auth.py::AuthTestCase::test_can_login": true,
+  "src/test/test_auth.py::AuthTestCase::test_invalid_password": true,
+  "src/test/test_auth.py::AuthTestCase::test_invalid_username": true,
+  "src/test/test_auth.py::AuthTestCase::test_logout": true,
+  "src/test/test_todo.py::TodoTestCase::test_complete_todo": true,
+  "src/test/test_todo.py::TodoTestCase::test_create_todo": true,
+  "src/test/test_todo.py::test_complete_todo": true,
+  "src/test/test_todo.py::test_create_todo": true
+}

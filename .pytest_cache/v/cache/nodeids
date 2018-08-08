@@ -1,0 +1,4 @@
+[
+  "src/test/test_todo.py::test_create_todo",
+  "src/test/test_todo.py::test_complete_todo"
+]
